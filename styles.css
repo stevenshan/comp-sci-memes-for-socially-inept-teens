@@ -1,11 +1,48 @@
 body {
     margin: 0;
     padding: 0;
-    background: #5ea9c4;
+    background: #e5e5dc;
 }
 
 * {
     box-sizing: border-box;
+}
+
+/*
+===========================================================
+Fixed header menu
+===========================================================
+*/
+
+header {
+    position: fixed;
+    display: block;
+    top: 0px;
+    left: 30px; /* padding around each box */
+    right: 30px; /* padding around each box */
+    height: 70px;
+    background: #363636;
+    z-index: 1000;
+    color: #ffffff;
+}
+
+header h1 {
+    padding: 0px;
+    margin: 0px;
+    font-size: 22px;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    width: 650px;
+    height: 70px;
+    line-height: 70px;
+    text-align: center;
+    left: 0px;
+    right: 0px;
+    margin: auto; 
+    position: absolute;
+}
+
+header h1:before {
+    content: "Comp Sci Memes for Socially Inept Teens";
 }
 
 /*
@@ -19,6 +56,11 @@ Full page image gallery
     position: relative;
     width: 100%;
     table-layout: fixed;
+    margin-top: 70px; /* height of header + margin */
+}
+
+#photos, #photos .column .block {
+    padding: 15px;
 }
 
 #photos .column {
@@ -28,7 +70,6 @@ Full page image gallery
 }
 
 #photos .column .block {
-    padding: 10px;
     width: 100%;
     font-size: 0px;
 }
@@ -44,3 +85,33 @@ Full page image gallery
     height: auto !important;
 }
 
+/*
+===========================================================
+Mobile design
+===========================================================
+*/
+
+@media (max-width: 900px) {
+
+    header h1 {
+        width: 0px;
+    }
+
+    header h1:before {
+        content: "Memes";
+    }
+
+}
+
+@media (max-width: 700px) {
+
+    header {
+        left: 10px;
+        right: 10px;
+    }
+
+    #photos, #photos .column .block {
+        padding: 5px  
+    }
+
+}

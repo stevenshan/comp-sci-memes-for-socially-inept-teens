@@ -3,11 +3,12 @@ var imageLoadNum = 1; // number of images to load at a time
 // distance from image to each side of block
 var imagePadding = 20;
 
-// global variables, no need to manually change
+// global variables, don't change these
 var imagesDir = "images/"
 var images = [];
 var index = 0;
 var loading = false;
+var numColumns = -1;
 
 function getColumnHeight(column)
 {
@@ -52,6 +53,8 @@ function getMinColumn()
     return {"column": column, "height": minHeight};
 }
 
+// adds image to page
+// do not call this directly, call scrollEvent instead
 function loadImages(count, callback = undefined)
 {
     if (loading)
@@ -154,7 +157,6 @@ function loadImages(count, callback = undefined)
 
 // event to check scroll position to see if page is at bottom
 // so more images need to be loaded
-// returns whether more images needed to be loaded
 function scrollEvent(callback = undefined)
 {
     // make sure there are more images to load
@@ -200,6 +202,31 @@ function scrollEvent(callback = undefined)
     return false;
 }
 
+// handler for window resize in order to change number of columns
+function resizeEvent()
+{
+    // calculate how many columns there should be
+    var windowWidth = $(window).width();
+    var newNumColumns = 4;
+    if (windowWidth < 1000) newNumColumns = 3;
+    if (windowWidth < 800)  newNumColumns = 2;
+    if (windowWidth < 400)  newNumColumns = 1;
+
+    // quit if nothing needs to be changed
+    if (numColumns == newNumColumns) return;
+
+    // update number of columns
+    numColumns = newNumColumns;
+    var columnHTML = '<div class="column"></div>';
+    $("#photos").html(columnHTML.repeat(newNumColumns));
+
+    // reset image index
+    index = 0;
+
+    // reload images
+    scrollEvent();
+}
+
 $(function(){
     // load index file to get image urls
     $.getJSON("index.json", function(json){
@@ -222,6 +249,9 @@ $(function(){
             return b["_timestamp"] - a["_timestamp"];
         });
 
+        // trigger resize to create columns
+        resizeEvent();
+
         // load images on page load until page is filled
         var scrollLoadCallback = function(loadedMore)
         {
@@ -232,9 +262,13 @@ $(function(){
         }
         scrollEvent(scrollLoadCallback);
 
+        // setup event triggers
+
         // trigger for scroll event
         $(window).scroll(scrollEvent);
 
+        // trigger for scroll event
+        $(window).resize(resizeEvent);
     });
 
 });
