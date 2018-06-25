@@ -1,5 +1,5 @@
 // parameters, can change these
-var imageLoadNum = 1; // number of images to load at a time
+var imageLoadNum = 2; // number of images to load at a time
 // distance from image to each side of block
 var imagePadding = 20;
 
@@ -94,9 +94,11 @@ function loadImages(count, callback = undefined)
         var id = "image" + origIndex;
         html = $(
             '<div class="block" id="' + id + '">' + 
-                '<div class="imgWrapper">' + 
-                    '<img src="' + path + '">' +
-                '</div>' +
+                '<a href="' + path + '">' +
+                    '<div class="imgWrapper">' + 
+                        '<img src="' + path + '">' +
+                    '</div>' +
+                '</a>' + 
             '</div>');
 
         // add image to shortest column
