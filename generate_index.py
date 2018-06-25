@@ -7,6 +7,8 @@
 
 import os
 import json
+from dateutil.parser import parse
+import datetime
 
 if __name__ == "__main__":
 
@@ -60,10 +62,18 @@ if __name__ == "__main__":
         try:
             return json[key]
         except:
-            return ""
+            return "" 
+    now = datetime.datetime.now().isoformat()
+    ts = lambda x: parse(x).isoformat()
     for filename in index["images"]:
         image = index["images"][filename]
         image["timestamp"] = get(image, "timestamp")
+        try:
+            image["timestamp"] = ts(image["timestamp"])
+        except:
+            image["timestamp"] = None
+        if image["timestamp"] == None or image["timestamp"] == "":
+            image["timestamp"] = now
         image["title"] = get(image, "title")
         image["description"] = get(image, "description")
 
