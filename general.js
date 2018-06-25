@@ -162,10 +162,14 @@ function scrollEvent(callback = undefined)
     // make sure there are more images to load
     if (index >= images.length)
     {
+        $("#loadingMessage").css("display", "none");
+
         if (typeof callback === "function") 
             callback(false);
         return false;
     } 
+
+    $("#loadingMessage").css("display", "block");
 
     // don't try to load more until finished loading previous images
     if (loading == true)

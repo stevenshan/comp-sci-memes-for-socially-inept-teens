@@ -77,12 +77,29 @@ Full page image gallery
 #photos .column .block .imgWrapper {
     padding: 10px;
     background: #ffffff;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 
+            0 3px 6px rgba(0,0,0,0.23);
 }
 
 #photos .column .block .imgWrapper img {
     width: 100%;
     height: auto !important;
+}
+
+/*
+ * Loading message at bottom of page
+ */
+
+#loadingMessage {
+    height: 50px;
+    line-height: 50px;
+    margin: 0px 30px;
+    width: auto;
+    text-align: center;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 
+            0 3px 6px rgba(0,0,0,0.23);
+    background: #ffffff;
+    margin-bottom: 30px;
 }
 
 /*
@@ -112,6 +129,10 @@ Mobile design
 
     #photos, #photos .column .block {
         padding: 5px  
+    }
+
+    #loadingMessage {
+        margin: 10px 0px;
     }
 
 }
