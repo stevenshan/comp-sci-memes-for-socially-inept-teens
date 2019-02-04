@@ -38,7 +38,7 @@ function getMinColumn()
     var i = columns.length - 1;
     while (i >= 0)
     {
-        var curColumn = columns.get(i); 
+        var curColumn = columns.get(i);
         var colHeight = getColumnHeight(curColumn);
 
         if (colHeight <= minHeight || minHeight == -1)
@@ -93,12 +93,12 @@ function loadImages(count, callback = undefined)
         // generate html for adding image to page
         var id = "image" + origIndex;
         html = $(
-            '<div class="block" id="' + id + '">' + 
+            '<div class="block" id="' + id + '">' +
                 '<a href="' + path + '">' +
-                    '<div class="imgWrapper">' + 
+                    '<div class="imgWrapper">' +
                         '<img src="' + path + '">' +
                     '</div>' +
-                '</a>' + 
+                '</a>' +
             '</div>');
 
         // add image to shortest column
@@ -123,8 +123,8 @@ function loadImages(count, callback = undefined)
 
         // update image properties
         var obj = images[this.index];
-        obj["_imageSize"]["x"] = this.width;        
-        obj["_imageSize"]["y"] = this.height;        
+        obj["_imageSize"]["x"] = this.width;
+        obj["_imageSize"]["y"] = this.height;
 
         // done preloading
         if (preloadQueueSize == 0 && queuedAllPreload)
@@ -166,10 +166,10 @@ function scrollEvent(callback = undefined)
     {
         $("#loadingMessage").css("display", "none");
 
-        if (typeof callback === "function") 
+        if (typeof callback === "function")
             callback(false);
         return false;
-    } 
+    }
 
     $("#loadingMessage").css("display", "block");
 
@@ -190,10 +190,10 @@ function scrollEvent(callback = undefined)
     // check if scrolled to bottom of photos
     if (position >= photosHeight || position >= docHeight - 10)
     {
-        var tempCallback = function() { 
-            if (typeof callback === "function") 
+        var tempCallback = function() {
+            if (typeof callback === "function")
             {
-                callback(true) 
+                callback(true)
             }
             $(window).trigger("scroll");
         };
@@ -201,7 +201,7 @@ function scrollEvent(callback = undefined)
         return true;
     }
 
-    if (typeof callback === "function") 
+    if (typeof callback === "function")
     {
         callback(false);
     }
@@ -237,7 +237,7 @@ $(function(){
     // load index file to get image urls
     $.getJSON("index.json", function(json){
         imagesDir = json["directory"];
-        tempImages = json["images"]; 
+        tempImages = json["images"];
 
         // parse timestamps and add object to images variable
         for (var url in tempImages)
